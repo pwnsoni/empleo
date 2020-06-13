@@ -95,7 +95,7 @@ export default {
 
 div #app{
         min-width: 100%;
-        min-height: 320px;
+        min-height: 420px;
     }
 
 div #mainContent {
@@ -130,7 +130,7 @@ div #slab{
   background: rgb(236, 236, 243);
   margin-bottom: 7vw;
   margin-top: 7vw;
-  box-shadow: 0px 0px 30px 0px #666;
+  /* box-shadow: 0px 0px 30px 0px #666; */
 }
 
 .container {
