@@ -7,9 +7,7 @@
 
 <style scoped>
 
-    h1{
-        margin: 100px 100px 100px 100px;
-    }
+    
 
     div #app{
         min-width: 100%;

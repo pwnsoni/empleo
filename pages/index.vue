@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <!-- <div class="container">
       <div>
         <logo />
@@ -92,6 +92,11 @@ export default {
 </script>
 
 <style>
+
+div #app{
+        min-width: 100%;
+        min-height: 400px;
+    }
 
 div #mainContent {
   text-align: center;
