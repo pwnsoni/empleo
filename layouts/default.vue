@@ -1,5 +1,8 @@
 <template>
   <div>
+
+    <Header />
+
     <nuxt />
 
     <Footer />
@@ -8,9 +11,11 @@
 
 <script>
 import Footer from "~/components/Footer.vue";
+import Header from "~/components/Header.vue";
 export default {
   components: {
-    Footer
+    Footer,
+    Header
   }  
 }
 </script>

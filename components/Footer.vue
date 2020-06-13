@@ -32,12 +32,16 @@
         text-decoration: none;
     }
 
+    
+
     div #footer #footer-content {
         margin-top: 10px;
+        bottom: 1.5vw;
         margin-bottom: 30px;
         color: darkblue;
         justify-content: center;
         text-align: center;
+        font-size: 1.5vw;
     }
 
 
