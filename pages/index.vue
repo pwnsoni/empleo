@@ -95,7 +95,7 @@ export default {
 
 div #app{
         min-width: 100%;
-        min-height: 400px;
+        min-height: 320px;
     }
 
 div #mainContent {
@@ -110,7 +110,7 @@ span {
 
 div #slab  #comps{
   /* display: inline; */
-  background: rgb(209, 209, 214);
+  background: rgb(236, 236, 243);
   justify-content: space-evenly;
   text-align: center;
   word-spacing: 15vw;
@@ -127,9 +127,10 @@ div #slab  #center {
 div #slab{
   width: 100%;
   height: 100%;
-  background: rgb(209, 209, 214);
+  background: rgb(236, 236, 243);
   margin-bottom: 7vw;
   margin-top: 7vw;
+  box-shadow: 0px 0px 30px 0px #666;
 }
 
 .container {

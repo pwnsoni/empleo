@@ -3,7 +3,7 @@
         <div>
         <b-navbar toggleable="lg">
             <!-- <a to="/"> <b-navbar-brand to="/">Empleo</b-navbar-brand> </a> -->
-            <b-navbar-brand to="/"><a to="/"> <strong> <font-awesome-icon :icon="['fab', 'etsy']"/>mpleo </strong> </a> </b-navbar-brand>
+            <b-navbar-brand to="/"><span> <strong> <font-awesome-icon :icon="['fab', 'etsy']"/>mpleo </strong> </span> </b-navbar-brand>
 
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -36,8 +36,8 @@
                 <b-dropdown-item href="#">Sign Out</b-dropdown-item>
                 </b-nav-item-dropdown> -->
 
-                <b-nav-item to="/login"> <a> Link </a></b-nav-item>
-                <b-nav-item href="#" disabled>Disabled</b-nav-item>
+                <b-nav-item to="/login"> <span> Link </span></b-nav-item>
+                <b-nav-item to="#" disabled> <span> Disabled  </span></b-nav-item>
             
             </b-navbar-nav>
             </b-collapse>
@@ -60,11 +60,11 @@
         background: rgb(194, 194, 241);
     }
     
-    a{
+    span{
         color: darkblue;
     }
 
-    a:hover{
+    span:hover{
         color: rgb(84, 84, 238);
         text-decoration: none;
     }
