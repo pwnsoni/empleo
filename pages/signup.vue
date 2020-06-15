@@ -70,7 +70,7 @@
       async doLogin() {
         confirm(JSON.stringify(this.form))
         console.log(this.form)
-        // let x = await this.$axios.$post('/api/auth/users', this.form)
+        let x = await this.$axios.$post('/api/auth/users', this.form)
         this.$router.push('/login')
         // const token = x.token;
         // console.log(token);

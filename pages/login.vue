@@ -14,7 +14,7 @@
             <b-form-group label=" You are ">
               <b-form-radio-group
                 id="radio-slots"
-                v-model="userType"
+                v-model="form.userType"
                 :options="options"
                 name="radio-options-slots"
               > 
@@ -22,14 +22,14 @@
             </b-form-group>
 
             <label for="email">Email</label>
-            <input type="text" id="email" v-model="email" placeholder="me@example.com" autocomplete="off">
+            <input type="text" id="email" v-model="form.email" placeholder="me@example.com" autocomplete="off">
 
            <label for="password">
               Password   <font-awesome-icon v-if="!hidePassword" @click="hidePassword = !hidePassword" :icon="['fas', 'eye-slash']"/> 
               <font-awesome-icon v-if="hidePassword" @click="hidePassword = !hidePassword" :icon="['fas', 'eye']"/>
            </label>
-            <input type="password" id="password" v-if="hidePassword" v-model="password" placeholder="**********">
-            <input type="text" id="password" v-if="!hidePassword" v-model="password" placeholder="**********">
+            <input type="password" id="password" v-if="hidePassword" v-model="form.password" placeholder="**********">
+            <input type="text" id="password" v-if="!hidePassword" v-model="form.password" placeholder="**********">
 
             <button type="submit">Log in</button>
         </form>
@@ -43,8 +43,12 @@
   export default { 
     data() {
       return{
-      email: '',
-      password: '',
+
+        form: {
+          email: '',
+          password: '',
+          passwordType: 'password',
+      },
       hidePassword: true,
       passwordType: 'password',
       options: [
@@ -57,12 +61,8 @@
     
     methods: {
       async doLogin() {
-        alert('Not implemented yet :O')
-        let dt = {};
-        dt.email = this.email;
-        dt.password = this.password;
-        alert(JSON.stringify(dt))
-        let x = await this.$axios.$post('/api/auth/login', dt);
+        confirm(JSON.stringify(this.form))
+        let x = await this.$axios.$post('/api/auth/login', this.form);
         const token = x.token;
         console.log(token);
         this.$axios.setToken(token, 'Bearer')

@@ -11,8 +11,8 @@ module.exports = {
       let result = {};
       let status = 201;
       if (!err) {
-        const { name, password } = req.body;
-        const user = new User({ name, password}); // document = instance of a model
+        const { email, password, userType, name } = req.body;
+        const user = new User({ email, password, userType, name}); // document = instance of a model
         // TODO: We can hash the password here as well before we insert
         user.save((err, user) => {
           if (!err) {
@@ -38,28 +38,101 @@ module.exports = {
     });
   },
 
+  update: (req, res) => {
+    mongoose.connect(connUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+      let result = {};
+      let status = 200;
+      if (!err) {
+        const payload = req.decoded;
+        const { github, linkedIn, mail, website } = req.body;
+        const email = payload.user;
+
+        console.log(payload);
+        if (payload ) {
+          User.findOne({email}, (err, user) => {
+            if (!err) {
+              result.status = status;
+              let profiles = {};
+
+              if(user.profiles) profiles = JSON.parse(user.profiles);
+              
+              profiles.github = github;
+              profiles.linkedIn = linkedIn;
+              profiles.mail = mail;
+              profiles.website = website;
+
+              user.profiles = JSON.stringify(profiles);
+
+              user.save((err, user) => {
+                if (!err) {
+                  result.status = status;
+                  result.result = user;
+                } else {
+                  status = 500;
+                  result.status = status;
+                  result.error = err;
+                }
+              });
+
+              console.log(user + "updated");
+
+              result.error = err;
+              result.result = user;
+            } else {
+              status = 500;
+              result.status = status;
+              result.error = err;
+            }
+            res.status(status).send(result);
+          }).then(() => mongoose.connection.close());
+        } else {
+          status = 401;
+          result.status = status;
+          result.error = `Authentication error`;
+          res.status(status).send(result);
+
+          mongoose.connection.close();
+        }
+      } else {
+        status = 500;
+        result.status = status;
+        result.error = err;
+        res.status(status).send(result);
+
+        mongoose.connection.close();
+      }
+    });
+  },
+
   login: (req, res) => {
-    const { name, password } = req.body;
+    const { email, password, userType } = req.body;
 
 
-    console.log(name)
+    console.log(email )
     console.log(password)
+    console.log('login')
 
     mongoose.connect(connUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
       let result = {};
       let status = 200;
       if(!err) {
 
-        User.findOne({name}, (err, user) => {
+        User.findOne({email}, (err, user) => {
           if (!err && user) {
             console.log('!!!!!!!!')
             console.log(user)
             // We could compare passwords in our model instead of below as well
+
+            // if (user.userType != userType){
+            //   status = 500;
+            //   result.status = status;
+            //   result.error = "You're not a " + userType;
+            // }
             bcrypt.compare(password, user.password).then(match => {
               if (match) {
                 status = 200;
                 // Create a token
-                const payload = { user: user.name };
+                const payload = { user: user.email };
                 const options = { expiresIn: '2d', issuer: 'https://scotch.io' };
                 const secret = process.env.JWT_SECRET;
                 const token = jwt.sign(payload, secret, options);
@@ -107,7 +180,7 @@ module.exports = {
       if (!err) {
         const payload = req.decoded;
         console.log(payload);
-        if (payload && payload.user === 'admin') {
+        if (payload && payload.email === 'admin') {
           User.find({}, (err, users) => {
             if (!err) {
               result.status = status;

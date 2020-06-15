@@ -41,7 +41,6 @@
         color: darkblue;
         justify-content: center;
         text-align: center;
-        font-size: 1.5vw;
     }
 
 
