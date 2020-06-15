@@ -43,7 +43,7 @@
         <h2 class="subtitle">
           Find your dream job
 
-          <font-awesome-icon :icon="['fab', 'linkedin']"/>
+            
         </h2>
         </div>
     </div>
@@ -116,6 +116,7 @@ div #slab  #comps{
   word-spacing: 15vw;
   font-size: 7vw;
   padding: 6vw;
+  color: #34495e;
 }
 
 div #slab  #center {
@@ -130,7 +131,7 @@ div #slab{
   background: rgb(236, 236, 243);
   margin-bottom: 7vw;
   margin-top: 7vw;
-  /* box-shadow: 0px 0px 30px 0px #666; */
+  /* box-shadow: 0px 0px 20px 0px rgb(236, 236, 243); */
 }
 
 .container {
@@ -155,7 +156,7 @@ div #slab{
 .subtitle {
   font-weight: 300;
   font-size: 6vw;
-  color: #526488;
+  color: #284886;
   word-spacing: 5px;
   padding-bottom: 15px;
 }

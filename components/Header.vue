@@ -36,7 +36,9 @@
                 <b-dropdown-item href="#">Sign Out</b-dropdown-item>
                 </b-nav-item-dropdown> -->
 
-                <b-nav-item to="/login"> <span> Link </span></b-nav-item>
+                <b-nav-item to="/login"> <span> Log in </span></b-nav-item>
+
+                <b-nav-item to="/signup"> <span> Sign Up </span></b-nav-item>
                 <b-nav-item to="#" disabled> <span> Disabled  </span></b-nav-item>
             
             </b-navbar-nav>

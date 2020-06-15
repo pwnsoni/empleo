@@ -1,83 +1,100 @@
 <template>
     <div id="app">
-        <body>
-    <div id="login">
+    <body>
+      <div id="login">
         <div id="description">
-        <h1>Login</h1>
-        <p>By logging in you agree to the ridiculously long terms that you didn't bother to read.</p>
-        <p> New Here, <nuxt-link to='/signup' id="link"> signup  </nuxt-link></p>
-        
+          <h1>Sign Up</h1>
+          <p>By signing up you agree to the ridiculously long terms that you didn't bother to read.</p>
+          <p> Already a member, <nuxt-link to='/login' id="link"> login  </nuxt-link></p>
         </div>
         <div id="form">
-        <form @submit.prevent="doLogin">
+          <form @submit.prevent="doLogin">
 
             <b-form-group label=" You are ">
               <b-form-radio-group
                 id="radio-slots"
-                v-model="userType"
+                v-model="form.userType"
                 :options="options"
                 name="radio-options-slots"
               > 
               </b-form-radio-group>
             </b-form-group>
 
-            <label for="email">Email</label>
-            <input type="text" id="email" v-model="email" placeholder="me@example.com" autocomplete="off">
 
-           <label for="password">
+            <!-- <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label> -->
+
+            <label for="full name">Full Name</label>
+            <input type="text" id="name" v-model="form.name" placeholder="Johny Deep" autocomplete="off">
+
+            <label for="email">Email</label>
+            <input type="text" id="email" v-model="form.email" placeholder="me@example.com" autocomplete="off">
+
+            <label for="password">
               Password   <font-awesome-icon v-if="!hidePassword" @click="hidePassword = !hidePassword" :icon="['fas', 'eye-slash']"/> 
               <font-awesome-icon v-if="hidePassword" @click="hidePassword = !hidePassword" :icon="['fas', 'eye']"/>
-           </label>
-            <input type="password" id="password" v-if="hidePassword" v-model="password" placeholder="**********">
-            <input type="text" id="password" v-if="!hidePassword" v-model="password" placeholder="**********">
+            </label>
+            <input type="password" id="password" v-if="hidePassword" v-model="form.password" placeholder="**********">
+            <input type="text" id="password" v-if="!hidePassword" v-model="form.password" placeholder="**********">
 
-            <button type="submit">Log in</button>
+            <button type="submit">Sign Up</button>
         </form>
         </div>
-    </div>
-        </body>
-    </div>
+      </div>
+    </body>
+  </div>
 </template>
 
 <script>
-  export default { 
+  export default {
     data() {
-      return{
-      email: '',
-      password: '',
-      hidePassword: true,
-      passwordType: 'password',
-      options: [
-        { text: 'recruiter', value: 'recruiter' },
-        { text: 'seeker', value: 'seeker' },
-      ],
-      userType: ''
-    }
+      return {
+        form: {
+          name: '',
+          email: '',
+          password: '',
+          userType: '',
+        },
+        options: [
+          { text: 'recruiter', value: 'recruiter' },
+          { text: 'seeker', value: 'seeker' },
+          ],
+        hidePassword: true,
+        passwordType: 'password',
+      }
     },
     
     methods: {
       async doLogin() {
-        alert('Not implemented yet :O')
-        let dt = {};
-        dt.email = this.email;
-        dt.password = this.password;
-        alert(JSON.stringify(dt))
-        let x = await this.$axios.$post('/api/auth/login', dt);
-        const token = x.token;
-        console.log(token);
-        this.$axios.setToken(token, 'Bearer')
-        console.log(await this.$axios.$get('/api/auth/test'))
-        alert(await this.$axios.$get('/api/auth/test'))
+        confirm(JSON.stringify(this.form))
+        console.log(this.form)
+        // let x = await this.$axios.$post('/api/auth/users', this.form)
+        this.$router.push('/login')
+        // const token = x.token;
+        // console.log(token);
+        // this.$axios.setToken(token, 'Bearer')
+        // console.log(await this.$axios.$get('/api/auth/test'))
+        // alert(await this.$axios.$get('/api/auth/test'))
+      },
+
+      onReset(evt) {
+        evt.preventDefault()
+        // Reset our form values
+        this.form.name = ''
+        this.form.password = ''
+        // Trick to reset/clear native browser form validation state
+        this.show = false
+        this.$nextTick(() => {
+          this.show = true
+        })
       }
     }
   }
 </script>
 
 <style  scoped>
-
-#link{
-    color: #34495e;
-}
 * {
   box-sizing: border-box;
   font-family: 'Nunito', sans-serif;
@@ -99,6 +116,10 @@ div#app {
   /* justify-content: center; */
   padding: 0;
   
+}
+
+#link{
+    color: #34495e;
 }
 
 div#app div#login {
