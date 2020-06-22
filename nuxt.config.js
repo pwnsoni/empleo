@@ -27,8 +27,9 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+ plugins: [
+  { src: '~/plugins/localStorage.js', ssr: false }  
+],
   /*
   ** Nuxt.js dev-modules
   */
@@ -40,7 +41,9 @@ module.exports = {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
+    '@nuxtjs/toast',
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     [
       'nuxt-fontawesome', {
         imports: [
@@ -56,6 +59,47 @@ module.exports = {
       }
     ]
   ],
+
+  toast: {
+    position: 'top-center',
+    register: [ // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
+  },
+
+  proxy: {
+    '/api': {
+      target: 'http://example.com',
+      pathRewrite: {
+        '^/api' : '/'
+        }
+      }
+  },
+
+  axios: {
+    baseURL: 'https://empleo-api.herokuapp.com',
+    // baseURL: 'http://localhost:5000',
+    proxyHeaders: false,
+    credentials: false
+  },
+  
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       endpoints: {
+  //         login: { url: '/api/auth/login', method: 'post', propertyName: 'data.token' },
+  //         user: { url: '/api/auth/me', method: 'get', propertyName: 'data' },
+  //         logout: false
+  //       }
+  //     }
+  //   }
+  // },
   /*
   ** Build configuration
   */

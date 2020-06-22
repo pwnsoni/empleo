@@ -36,11 +36,14 @@
                 <b-dropdown-item href="#">Sign Out</b-dropdown-item>
                 </b-nav-item-dropdown> -->
 
-                <b-nav-item to="/login"> <span> Log in </span></b-nav-item>
+                <b-nav-item to="/jobs" > <span> jobs </span></b-nav-item>
 
-                <b-nav-item to="/signup"> <span> Sign Up </span></b-nav-item>
-                <b-nav-item to="#" disabled> <span> Disabled  </span></b-nav-item>
-            
+                <b-nav-item to="/login" v-if="!isLoggedin()"> <span> login </span></b-nav-item>
+
+                <b-nav-item to="/signup" v-if="!isLoggedin()"> <span> signup </span></b-nav-item>
+                <b-nav-item to="/me" v-if="isLoggedin()"> <span> profile  </span></b-nav-item>
+                
+                <b-nav-item   > <span @click="logout" v-if="isLoggedin()"> logout  </span></b-nav-item>
             </b-navbar-nav>
             </b-collapse>
 
@@ -71,9 +74,24 @@
         text-decoration: none;
     }
 
-    
-
-
-
 
 </style>
+
+<script>
+export default {
+    
+    
+    methods: {
+        logout(){
+            
+            this.$store.dispatch('LOG_OUT')
+            
+            
+        },
+
+        isLoggedin(){
+             return this.$store.state.isLoggedin;
+        }
+    }
+}
+</script>

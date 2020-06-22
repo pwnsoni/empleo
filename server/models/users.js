@@ -8,11 +8,16 @@ const stage = require('../config')[environment];
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  name: {
+  userName: {
     type: 'String',
     required: true,
     trim: true,
     unique: true
+  },
+  fullName: {
+    type: 'String',
+    required: true,
+    trim: true,
   },
   password: {
     type: 'String',
@@ -33,6 +38,14 @@ const userSchema = new Schema({
 
   profiles:{
     type: 'String'
+  },
+
+  professionalSummary:{
+    type: 'String'
+  },
+
+  appliedJobs: {
+    type: [String]
   }
 });
 

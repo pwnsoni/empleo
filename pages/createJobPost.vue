@@ -4,14 +4,13 @@
     <body>
       <div id="login">
         <div id="description">
-          <h1>Sign Up</h1>
-          <p>By signing up you agree to the ridiculously long terms that you didn't bother to read.</p>
-          <p> Already a member, <nuxt-link to='/login' id="link"> login  </nuxt-link></p>
+          <h1>Post a hiring</h1>
+          <p>Enter the information accurate as per your knowledge, it may affect your hiring.</p>
         </div>
         <div id="form">
-          <form @submit.prevent="doSignup">
+          <form @submit.prevent="doLogin">
 
-            <b-form-group label=" You are ">
+            <!-- <b-form-group label=" You are ">
               <b-form-radio-group
                 id="radio-slots"
                 v-model="form.userType"
@@ -19,7 +18,7 @@
                 name="radio-options-slots"
               > 
               </b-form-radio-group>
-            </b-form-group>
+            </b-form-group> -->
 
 
             <!-- <input type="radio" id="male" name="gender" value="male">
@@ -27,10 +26,36 @@
             <input type="radio" id="female" name="gender" value="female">
             <label for="female">Female</label> -->
 
-            <label for="full name">Full Name</label>
-            <input type="text" id="full name" v-model="form.fullName" placeholder="Johny Deep" autocomplete="off">
+            <label for="Job Profile">Job Profile</label>
+            <input type="text" id="github" v-model="form.jobProfile" placeholder="https://" autocomplete="off">
+
+            <label for="organisatiom">organisatiom</label>
+            <input type="text" id="facebook" v-model="form.organisatiom" placeholder="https://" autocomplete="off">
+
+            <label for="Description">Job Description</label>
+            <input type="textbox" id="linkedin" v-model="form.description" placeholder="https://" autocomplete="off">
+
+
+
+            <label for="salary">salary</label>
+            <input type="text" id="website" v-model="form.salary" placeholder="https://" autocomplete="off">
             
-            <label for="username">username</label>
+            <label for="Requirement">Requirement</label>
+            <input type="text" id="website" v-model="form.website" placeholder="https://" autocomplete="off">
+            
+            <label for="Location">Location</label>
+            <input type="text" id="website" v-model="form.location" placeholder="https://" autocomplete="off">
+
+            <label for="skill">skills required</label>
+            <input type="text" id="professionalSummary" v-model="form.skills" placeholder="summary" autocomplete="off">
+
+
+            <label for="Experience Required">Experience Required</label>
+            <input type="text" id="website" v-model="form.experience" placeholder="https://" autocomplete="off">
+
+            
+            
+            <!-- <label for="username">username</label>
             <input type="text" id="userName" v-model="form.userName" placeholder="JDeep" autocomplete="off">
             <label for="email">Email</label>
             <input type="text" id="email" v-model="form.email" placeholder="me@example.com" autocomplete="off">
@@ -40,9 +65,9 @@
               <font-awesome-icon v-if="hidePassword" @click="hidePassword = !hidePassword" :icon="['fas', 'eye']"/>
             </label>
             <input type="password" id="password" v-if="hidePassword" v-model="form.password" placeholder="**********">
-            <input type="text" id="password" v-if="!hidePassword" v-model="form.password" placeholder="**********">
+            <input type="text" id="password" v-if="!hidePassword" v-model="form.password" placeholder="**********"> -->
 
-            <button type="submit">Sign Up</button>
+            <button type="submit" v-if="stl">Sign Up</button>
         </form>
         </div>
       </div>
@@ -56,11 +81,15 @@
     data() {
       return {
         form: {
-          userName: '',
-          fullName: '',
-          email: '',
-          password: '',
-          userType: '',
+          github: '',
+          facebook: '',
+          linkedin: '',
+          website: '',
+          professionalSummary: ''
+        //   fullName: '',
+        //   email: '',
+        //   password: '',
+        //   userType: '',
         },
         options: [
           { text: 'recruiter', value: 'recruiter' },
@@ -68,20 +97,25 @@
           ],
         hidePassword: true,
         passwordType: 'password',
+        st: null
       }
     },
-    
+    computed : {
+        stl(){
+            return this.$store.state.user;
+        }
+    },
     methods: {
-      async doSignup() {
-        confirm(JSON.stringify(this.form))
+      async doLogin() {
+        console.log(this.stl)
+        console.log(this.form)
         try{
-        this.$store.dispatch('SIGN_USER_UP', this.form);
+        this.$store.dispatch('UPDATE_USER', this.form);
         
         // this.$store.dispatch('LOG_USER_IN', this.form);
         }
         catch(e){
-          alert('pta nhi')
-          alert(e.message);
+          alert(e);
         }
         // console.log(this.form)
         // let x = await this.$axios.$post('/api/auth/users', this.form)
@@ -153,8 +187,8 @@ div#app div#login {
 
 div#app div#login div#description {
   background-color: #ffffff;
-  width: 280px;
-  padding: 35px;
+  width: 350px;
+  padding: 45px;
 }
 
 div#app div#login div#description h1,
@@ -173,7 +207,7 @@ div#app div#login div#form {
   border-radius: 5px;
   box-shadow: 0px 0px 30px 0px #666;
   color: #ecf0f1;
-  width: 300px;
+  width: 330px;
   padding: 35px;
 }
 

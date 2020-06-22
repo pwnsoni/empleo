@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="appl">
     <!-- <div class="container">
       <div>
         <logo />
@@ -43,7 +43,7 @@
         <h2 class="subtitle">
           Find your dream job
 
-            
+          <font-awesome-icon :icon="['fab', 'linkedin']"/>
         </h2>
         </div>
     </div>
@@ -93,9 +93,9 @@ export default {
 
 <style>
 
-div #app{
+div #appl{
         min-width: 100%;
-        min-height: 420px;
+        min-height: 100%;
     }
 
 div #mainContent {
@@ -116,7 +116,6 @@ div #slab  #comps{
   word-spacing: 15vw;
   font-size: 7vw;
   padding: 6vw;
-  color: #34495e;
 }
 
 div #slab  #center {
@@ -131,7 +130,7 @@ div #slab{
   background: rgb(236, 236, 243);
   margin-bottom: 7vw;
   margin-top: 7vw;
-  /* box-shadow: 0px 0px 20px 0px rgb(236, 236, 243); */
+  box-shadow: 0px 0px 20px 0px rgb(236, 236, 243);
 }
 
 .container {
@@ -156,7 +155,7 @@ div #slab{
 .subtitle {
   font-weight: 300;
   font-size: 6vw;
-  color: #284886;
+  color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
 }

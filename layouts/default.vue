@@ -2,10 +2,10 @@
   <div>
 
     <Header />
-
     <nuxt />
-
+    <div id="footer">
     <Footer />
+    </div>
   </div>
 </template>
 
@@ -33,6 +33,13 @@ html {
   box-sizing: border-box;
 }
 
+div #body{
+  min-height: 70vh;
+}
+
+#footer{
+  bottom: 0px;
+}
 *,
 *:before,
 *:after {

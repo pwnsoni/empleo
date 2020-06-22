@@ -34,7 +34,7 @@ async function start () {
     await builder.build()
   }
 
-  app.use('/api/auth', routes(router));
+  app.use('/api', routes(router));
 
   // Give nuxt middleware to express
   app.use(nuxt.render)

@@ -41,6 +41,7 @@
 
 <script>
   export default { 
+
     data() {
       return{
 
@@ -55,21 +56,49 @@
         { text: 'recruiter', value: 'recruiter' },
         { text: 'seeker', value: 'seeker' },
       ],
+      error: null,
       userType: ''
     }
     },
-    
+
     methods: {
       async doLogin() {
-        confirm(JSON.stringify(this.form))
-        let x = await this.$axios.$post('/api/auth/login', this.form);
-        const token = x.token;
-        console.log(token);
-        this.$axios.setToken(token, 'Bearer')
-        console.log(await this.$axios.$get('/api/auth/test'))
-        alert(await this.$axios.$get('/api/auth/test'))
+        try{
+        
+          if (confirm(JSON.stringify(this.form))){
+            await this.$store.dispatch('LOG_USER_IN', this.form);
+          }
+          //           let x = await this.$axios.$post('/api/auth/login', this.form);
+          // const token = x.token;
+          // console.log(token);
+          // this.$axios.setToken(token, 'Bearer')
+          // console.log(await this.$axios.$get('/api/auth/test'))
+          // alert(await this.$axios.$get('/api/auth/test'))
+        } catch(e){
+          this.error = e;
+          alert(e)
+        }
       }
     }
+
+    // async doLogin() {
+    //     try{
+        
+    //     console.log(this.form);
+    //       confirm(JSON.stringify(this.form))
+    //       let x = await this.$auth.loginWith('local', {
+    //         data: this.form,
+    //       })
+    //       console.log(x);
+    //       alert(x)
+    //       console.log(this.$auth.user);
+    //       alert(this.$auth.loggedIn);
+    //       // confirm(this.$store.state.auth.loggedIn)
+    //     } catch(e){
+    //       this.error = e.response.data.message
+    //     }
+    //   }
+    // }
   }
 </script>
 

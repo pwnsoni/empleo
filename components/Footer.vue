@@ -1,7 +1,9 @@
 <template>
-    <div>
-        <div id="hrLine"> </div>
+    <div >
+        <body>
         <div id="footer">
+
+        <div id="hrLine"> </div>
             <div id="footer-content">
                 <p> 
                     Made with <font-awesome-icon :icon="['fas', 'heart']"/> by Nuxt 
@@ -9,6 +11,7 @@
                 </p>
             </div>
         </div>
+        </body>
     </div>
 </template>
 
@@ -32,12 +35,19 @@
         text-decoration: none;
     }
 
+    div #footer{
+        width: 100%;
+        height: 90px;
+        bottom: 0px;
+        margin-bottom: 0px;
+
+    }
     
 
     div #footer #footer-content {
         margin-top: 10px;
         bottom: 1.5vw;
-        margin-bottom: 30px;
+        /* margin-bottom: 30px; */
         color: darkblue;
         justify-content: center;
         text-align: center;

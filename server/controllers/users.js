@@ -11,13 +11,20 @@ module.exports = {
       let result = {};
       let status = 201;
       if (!err) {
-        const { email, password, userType, name } = req.body;
-        const user = new User({ email, password, userType, name}); // document = instance of a model
+        const { email, password, userType, fullName, userName } = req.body;
+        const user = new User({ email, password, userType, fullName, userName}); // document = instance of a model
         // TODO: We can hash the password here as well before we insert
+
+
+        console.log(user)
+        console.log('above save')
+
         user.save((err, user) => {
           if (!err) {
             result.status = status;
             result.result = user;
+            console.log(user)
+            console.log('under save')
           } else {
             status = 500;
             result.status = status;
@@ -44,7 +51,7 @@ module.exports = {
       let status = 200;
       if (!err) {
         const payload = req.decoded;
-        const { github, linkedIn, mail, website } = req.body;
+        const { github, linkedin, website, facebook, professionalSummary, appliedJob } = req.body;
         const email = payload.user;
 
         console.log(payload);
@@ -53,16 +60,21 @@ module.exports = {
             if (!err) {
               result.status = status;
               let profiles = {};
+              console.log(user + '[[]]]]\\\\\.ll')
 
-              if(user.profiles) profiles = JSON.parse(user.profiles);
-              
-              profiles.github = github;
-              profiles.linkedIn = linkedIn;
-              profiles.mail = mail;
-              profiles.website = website;
+              if (appliedJob){
+                user.appliedJobs.push(payload.userName);
+              } else{
+                if(user.profiles) profiles = JSON.parse(user.profiles);
+                
+                profiles.github = github;
+                profiles.linkedin = linkedin;
+                profiles.globe = website;
+                profiles.facebook = facebook;
 
-              user.profiles = JSON.stringify(profiles);
-
+                user.profiles = JSON.stringify(profiles);
+                user.professionalSummary = professionalSummary;
+              }
               user.save((err, user) => {
                 if (!err) {
                   result.status = status;
@@ -132,7 +144,7 @@ module.exports = {
               if (match) {
                 status = 200;
                 // Create a token
-                const payload = { user: user.email };
+                const payload = { user: user.email, userName: user.userName };
                 const options = { expiresIn: '2d', issuer: 'https://scotch.io' };
                 const secret = process.env.JWT_SECRET;
                 const token = jwt.sign(payload, secret, options);
@@ -201,6 +213,73 @@ module.exports = {
 
           mongoose.connection.close();
         }
+      } else {
+        status = 500;
+        result.status = status;
+        result.error = err;
+        res.status(status).send(result);
+
+        mongoose.connection.close();
+      }
+    });
+  },
+
+  getUser: (req, res) => {
+    mongoose.connect(connUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+      let result = {};
+      let status = 200;
+      if (!err) {
+        // const payload = req.decoded;
+        // // console.log(payload);
+        // if (payload && payload.email === req.params.user) {
+
+        const {userName} = req.params;
+          User.findOne({userName}, (err, users) => {
+            if (!err) {
+              result.status = status;
+              result.error = err;
+              result.result = users;
+            } else {
+              status = 500;
+              result.status = status;
+              result.error = err;
+            }
+            res.status(status).send(result);
+          }).then(() => mongoose.connection.close()); 
+      } else {
+        status = 500;
+        result.status = status;
+        result.error = err;
+        res.status(status).send(result);
+
+        mongoose.connection.close();
+      }
+    });
+  },
+
+  getCurrentUser: (req, res) => {
+    mongoose.connect(connUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+      let result = {};
+      let status = 200;
+      if (!err) {
+        const payload = req.decoded;
+        console.log(payload);
+        console.log("getCurrentUser")
+        // if (payload && payload.email === req.params.user) {
+          const email = payload.user;
+
+          User.findOne({email}, (err, users) => {
+            if (!err) {
+              result.status = status;
+              result.error = err;
+              result.result = users;
+            } else {
+              status = 500;
+              result.status = status;
+              result.error = err;
+            }
+            res.status(status).send(result);
+          }).then(() => mongoose.connection.close()); 
       } else {
         status = 500;
         result.status = status;
