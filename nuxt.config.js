@@ -75,19 +75,21 @@ module.exports = {
 
   proxy: {
     '/api': {
-      target: 'http://example.com',
+      // target: 'http://localhost:5000',
+      target: 'https://empleo-api.herokuapp.com',
       pathRewrite: {
         '^/api' : '/'
         }
       }
   },
 
-  axios: {
-    baseURL: 'https://empleo-api.herokuapp.com',
-    // baseURL: 'http://localhost:5000',
-    proxyHeaders: false,
-    credentials: false
-  },
+  // axios: {
+  //   // baseURL: 'https://empleo-api.herokuapp.com',
+  //   prefix: 'http://localhost:5000',
+  //   proxyHeaders: false,
+  //   credentials: false,
+  //   proxy: true
+  // },
   
   // auth: {
   //   strategies: {
