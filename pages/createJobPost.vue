@@ -27,31 +27,31 @@
             <label for="female">Female</label> -->
 
             <label for="Job Profile">Job Profile</label>
-            <input type="text" id="github" v-model="form.jobProfile" placeholder="https://" autocomplete="off">
+            <input type="text" id="github" v-model="form.jobProfile" placeholder="designation" autocomplete="off">
 
             <label for="organisatiom">organisatiom</label>
-            <input type="text" id="facebook" v-model="form.organisatiom" placeholder="https://" autocomplete="off">
+            <input type="text" id="facebook" v-model="form.organisation" placeholder="org" autocomplete="off">
 
             <label for="Description">Job Description</label>
-            <input type="textbox" id="linkedin" v-model="form.description" placeholder="https://" autocomplete="off">
+            <input type="textbox" id="linkedin" v-model="form.description" placeholder="JD" autocomplete="off">
 
 
 
             <label for="salary">salary</label>
-            <input type="text" id="website" v-model="form.salary" placeholder="https://" autocomplete="off">
+            <input type="text" id="website" v-model="form.salary" placeholder="LPA" autocomplete="off">
             
             <label for="Requirement">Requirement</label>
-            <input type="text" id="website" v-model="form.website" placeholder="https://" autocomplete="off">
+            <input type="text" id="website" v-model="form.requirement" placeholder="https://" autocomplete="off">
             
             <label for="Location">Location</label>
-            <input type="text" id="website" v-model="form.location" placeholder="https://" autocomplete="off">
+            <input type="text" id="website" v-model="form.location" placeholder="location" autocomplete="off">
 
             <label for="skill">skills required</label>
-            <input type="text" id="professionalSummary" v-model="form.skills" placeholder="summary" autocomplete="off">
+            <input type="text" id="professionalSummary" v-model="form.skills" placeholder="skills" autocomplete="off">
 
 
             <label for="Experience Required">Experience Required</label>
-            <input type="text" id="website" v-model="form.experience" placeholder="https://" autocomplete="off">
+            <input type="text" id="website" v-model="form.experience" placeholder="years" autocomplete="off">
 
             
             
@@ -67,7 +67,7 @@
             <input type="password" id="password" v-if="hidePassword" v-model="form.password" placeholder="**********">
             <input type="text" id="password" v-if="!hidePassword" v-model="form.password" placeholder="**********"> -->
 
-            <button type="submit" v-if="stl">Sign Up</button>
+            <button type="submit" v-if="stl">Post The Job</button>
         </form>
         </div>
       </div>
@@ -81,11 +81,14 @@
     data() {
       return {
         form: {
-          github: '',
-          facebook: '',
-          linkedin: '',
-          website: '',
-          professionalSummary: ''
+          jobProfile: '',
+          organisation:'',
+          description : '',
+          salary: '',
+          requirement: '',
+          location: '',
+          skills: '',
+          experience: 0
         //   fullName: '',
         //   email: '',
         //   password: '',
@@ -110,7 +113,7 @@
         console.log(this.stl)
         console.log(this.form)
         try{
-        this.$store.dispatch('UPDATE_USER', this.form);
+        this.$store.dispatch('POST_A_JOB', this.form);
         
         // this.$store.dispatch('LOG_USER_IN', this.form);
         }

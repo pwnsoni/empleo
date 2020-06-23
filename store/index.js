@@ -36,6 +36,16 @@ export const mutations = {
 
     getMyoPosts(state, myPosts){
         state.myPosts = myPosts;
+    },
+
+
+
+    postAJob(state, job){
+        console.log(state)
+        console.log(state.myPosts)
+        state.myPosts.data.result.push(job);
+        this.$toast.success('Job Posted successfully', { duration: 1000 })
+        this.$router.push('/me');
     }
 }
 
@@ -52,6 +62,21 @@ export const actions = {
         commit('getMyoPosts', myPosts);
     },
 
+    async DELETE_MY_POST({commit}, _id){
+        alert('delete this job' + _id);
+        //add code to delete the job
+    },
+
+    async EDIT_MY_POST({commit}, _id){
+        alert('delete this job' + _id);
+        //add code to delete the job
+    },
+
+    async APPLY_FOR_THIS_JOB({commit, state}, _id){
+        alert('Applying this job' + _id);
+        alert('Mr. ' + state.user.token)
+        //add code to delete the job
+    },
     increment({commit}, c){
         commit('INC', c);
     },
@@ -88,5 +113,17 @@ export const actions = {
 
     CUR_USER({commit}){
         commit('curUser');
+    },
+
+
+
+    async POST_A_JOB({commit, state}, data){
+        alert('in here' + state.user)
+        console.log(state)
+        const token = state.user.token;
+        this.$axios.setToken(token, 'Bearer')
+        const job = await this.$axios.post('/api/auth/posts', data)
+        console.log(job);
+        commit('postAJob', job);
     }
 }

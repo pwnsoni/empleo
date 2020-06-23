@@ -12,12 +12,13 @@
 
 
         <Profile  />
-
-        <div v-if="myPosts && tok.result.userType === 'recruiter'">
+        <!-- <div v-if='tok'> -->
+        <div v-if="myPosts && myPosts.data && tok && tok.result.userType === 'recruiter'">
         <div v-for="post in myPosts.data.result" :key='post'>
             <MyJobPost :post='post'/>
         </div>
         </div>
+        <!-- </div> -->
 
         </div>
     </div>
@@ -42,7 +43,7 @@ export default {
     data(){
         return{
             // myPosts:{},
-            tok: this.$store.state.user
+            tokl: this.$store.state.user
         }
     },
 
@@ -76,6 +77,10 @@ export default {
 
         isLoggedin(){
             return this.$store.state.isLoggedin;
+        },
+
+        tok(){
+            return this.$store.state.user;
         },
 
         myPosts(){

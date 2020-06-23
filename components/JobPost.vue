@@ -14,15 +14,23 @@
              <p id="skills" v-for="skill in post.skills" :key="skill"> <strong> Skills : {{skill}} </strong>  </p>  
              <div id="sLine">
                  Salary :<span> {{post.salary}} </span>
-                 Posted By :<span> {{post.postedBy}} </span>
+
+                 Experience : <span>{{post.experience + 'years'}} </span> 
+
+                <font-awesome-icon v-if='!expand'  @click="showAllInfo" :icon="['fas', 'expand']" v-b-tooltip.hover title="Show All Information" />
+
+                 <div v-if='expand'>
                  Posted On :<span> {{post.dateOfPosting}} </span>
                  Job Location :<span> {{post.location}} </span>
-                 Experience : <span>{{post.experience + 'years'}} </span> 
+
+                 Posted By :<span> {{post.postedBy}} </span>
                  Requirement :<span> {{post.requirement}} </span>
-                 
+                
+                <font-awesome-icon @click="showAllInfo" :icon="['fas', 'compress']" v-b-tooltip.hover title="Show Less Information" />
+                 </div>
              </div>
             <div id="button">
-             <button> <strong> Apply For the Position  </strong> </button>
+             <button @click="apply(post._id)"> <strong > Apply For the Position  </strong> </button>
             </div>
             
 
@@ -52,6 +60,23 @@
 <script>
 export default {
     props : ['post'],
+
+    data(){
+        return{
+            expand: false
+        }
+    },
+
+    methods: {
+
+        showAllInfo(){
+            this.expand = !this.expand;
+        },
+        apply(_id){
+            this.$store.dispatch('APPLY_FOR_THIS_JOB', _id);
+        }
+    }
+    
 }
 </script>
 
@@ -90,20 +115,31 @@ div  #card{
 }
 
 div #card #title{
-    font-size: 5vh;
+    font-size: 3vw;
 }
 
 div #card #subtitle{
-    font-size: 4vh;
+    font-size: 2.5vw;
+}
+div #card #skills{
+    font-size: 2vw;
 }
 
+div #card  #sLine span{
+    word-spacing: 2vw;
+    text-decoration: bold;
+    color: rgb(194, 136, 28);
+}
+
+
 div #card #desc{
-    font-size: 3vh;
+    font-size: 2vw;
 }
 div #card #sLine{
     text-align: center;
     justify-content: space-evenly;
     color: rgb(7, 52, 77);
+    font-size: 2vw;
 
 }
 
@@ -121,10 +157,33 @@ div #card #button {
 
 button{
     margin-top: 20px;
-    font-size: 3vh;
+    font-size: 2vw;
     margin-bottom: 10px;
     background: white;
     color: #34495e;
+}
+
+@media screen and (max-width: 600px) {
+    div #card #sLine{
+        font-size: 2.5vw;
+    }
+
+    button{
+        font-size: 2.5vw;
+    }
+
+    div #card #desc{
+        font-size: 2.5vw;
+    }
+
+    div #card #skills{
+        font-size: 2.5vw;
+    }
+
+    div #card #title{
+        font-size: 4vw;
+    }
+    
 }
 
 /* div #card #title{
