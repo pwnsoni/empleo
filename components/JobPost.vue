@@ -17,7 +17,7 @@
 
                  Experience : <span>{{post.experience + 'years'}} </span> 
 
-                <font-awesome-icon v-if='!expand'  @click="showAllInfo" :icon="['fas', 'expand']" v-b-tooltip.hover title="Show All Information" />
+                <font-awesome-icon v-if='!expand' class="expand"  @click="showAllInfo" :icon="['fas', 'expand']" v-b-tooltip.hover title="Show All Information" />
 
                  <div v-if='expand'>
                  Posted On :<span> {{post.dateOfPosting}} </span>
@@ -26,7 +26,7 @@
                  Posted By :<span> {{post.postedBy}} </span>
                  Requirement :<span> {{post.requirement}} </span>
                 
-                <font-awesome-icon @click="showAllInfo" :icon="['fas', 'compress']" v-b-tooltip.hover title="Show Less Information" />
+                <font-awesome-icon @click="showAllInfo" class="expand" :icon="['fas', 'compress']" v-b-tooltip.hover title="Show Less Information" />
                  </div>
              </div>
             <div id="button">
@@ -161,6 +161,10 @@ button{
     margin-bottom: 10px;
     background: white;
     color: #34495e;
+}
+
+div #card #sLine .expand:hover {
+    color: gray;
 }
 
 @media screen and (max-width: 600px) {

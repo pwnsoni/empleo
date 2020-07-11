@@ -4,7 +4,7 @@
     <body>
       <div id="login">
         <div id="description">
-          <h1>Post a hiring</h1>
+          <h1>Update Your Job Post</h1>
           <p>Enter the information accurate as per your knowledge, it may affect your hiring.</p>
         </div>
         <div id="form">

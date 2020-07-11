@@ -36,6 +36,10 @@
                 <b-dropdown-item href="#">Sign Out</b-dropdown-item>
                 </b-nav-item-dropdown> -->
 
+
+                <b-nav-item to="/createJobPost" v-if="isLoggedin()"> <span> wanna_hire </span></b-nav-item>
+
+
                 <b-nav-item to="/jobs" > <span> jobs </span></b-nav-item>
 
                 <b-nav-item to="/login" v-if="!isLoggedin()"> <span> login </span></b-nav-item>
