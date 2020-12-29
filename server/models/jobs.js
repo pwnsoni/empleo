@@ -52,7 +52,7 @@ const userSchema = new Schema({
   },
 
   experience: {
-    type: 'Number',
+    type: 'String',
     required: true,
     trim: true
   },

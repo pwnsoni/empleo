@@ -25,7 +25,7 @@ module.exports = {
         const job = new Job({  description, jobProfile, organisation, salary, 
             skills, requirement, location, experience, applicants, dateOfPosting, postedBy}); // document = instance of a model
         // TODO: We can hash the password here as well before we insert
-
+          console.log('ho Ja')
         
 
         console.log(job)
@@ -37,8 +37,12 @@ module.exports = {
             status = 500;
             result.status = status;
             result.error = err;
-            console.log(err)
+            console.log(err )
+            console.log('88')
           }
+
+          console.log(result)
+          console.log('88')
           res.status(status).send(result);
           // Close the connection after saving
           mongoose.connection.close();

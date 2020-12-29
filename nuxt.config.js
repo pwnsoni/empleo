@@ -75,24 +75,25 @@ module.exports = {
 
 
 
-  axios: {
-    // baseURL: 'hhttp://localhost:5000',
-    baseURL: 'https://empleo-api.herokuapp.com',
-    // prefix: 'http://localhost:5000',
-    // proxyHeaders: false,
-    // credentials: false,
-    proxy: true
-  },
+  // axios: {
+  //   // baseURL: 'http://localhost:5000',
+  //   // baseURL: 'https://empleo-api.herokuapp.com',
+  //   // prefix: 'http://localhost:5000',
+  //   // proxyHeaders: false,
+  //   // credentials: false,
+  //   proxy: true
+  // },
 
-  proxy: {
-    '/api': {
-      // target: 'http://localhost:5000',
-      target: 'https://empleo-api.herokuapp.com',
-      pathRewrite: {
-        '^/api' : '/'
-        }
-      }
-  },
+  // proxy: {
+  //   // target: 'https://empleo-api.herokuapp.com',
+  //   '/api': {
+  //     target: 'http://localhost:5000/api',
+  //     // target: 'https://empleo-api.herokuapp.com',
+  //     pathRewrite: {
+  //       '^/api' : '/'
+  //       }
+  //     }
+  // },
 
   
   // auth: {
