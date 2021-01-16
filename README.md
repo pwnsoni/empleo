@@ -2,6 +2,10 @@
 
 > A job portal system
 
+> Static site deployed on netlify 
+
+> Please visit https://empleo.ga/
+
 ## Build Setup
 
 ```bash
